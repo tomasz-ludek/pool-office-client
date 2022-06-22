@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                             " T3= " + inputDataFromSensor.t3 +
                             " P1= " + inputDataFromSensor.p1
             sensorDataTextView.text = rez
-           // getDataFromSensor()
+            //getDataFromSensor()
             getData()
         }
             dataFromSensor.currentSensorData.observe(this,dataFromSensorObserver)
@@ -40,14 +40,12 @@ class MainActivity : AppCompatActivity() {
                 call: Call<MutableList<PoolInfoData>>,
                 response: Response<MutableList<PoolInfoData>>
             ) {
-
                     val responseVar = response.body()
                     Log.d("LOG", responseVar.toString())
-
             }
 
             override fun onFailure(call: Call<MutableList<PoolInfoData>>, t: Throwable) {
-                Log.d("LOG", call.toString())
+                Log.d("LOG", t.message.toString())
             }
 
         })
@@ -68,7 +66,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<PoolInfoData>, t: Throwable) {
               ///  TODO("Not yet implemented")
-                Log.d("LOG", "ON FAILURE")
+               Log.d("LOG", t.message.toString())
+
             }
         })
     }

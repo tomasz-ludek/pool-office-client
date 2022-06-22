@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface PoolInfoService {
-    @GET("pool-info")
+    @GET("/pool-info")
     open fun getSensorData():Call<MutableList<PoolInfoData>>
 
 }
