@@ -6,11 +6,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface PoolInfoInterface {
-    @GET("pool-info/")
+    @GET("pool-info")
     open fun getSensorData(): Call<PoolInfoData>
 
     companion object{
-          var baseUrl = "http://127.0.0.1:8080/"
+        var baseUrl = "http://10.0.2.2:8080/"
         fun create(): PoolInfoInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
