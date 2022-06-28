@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pool-office-client</string>
+    <string name="data_from_sensor">Data from sensor</string>
 </resources>
