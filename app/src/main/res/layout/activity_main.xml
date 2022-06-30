@@ -18,4 +18,77 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.043" />
 
+    <Button
+        android:id="@+id/relayOneOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/relay_1_on"
+        app:layout_constraintBottom_toTopOf="@+id/relayFieveOn"
+        app:layout_constraintEnd_toStartOf="@+id/relayOneOff"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
+        app:layout_constraintVertical_bias="0.945" />
+
+    <Button
+        android:id="@+id/relayOneOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/relay_1_off"
+        app:layout_constraintBottom_toTopOf="@+id/relayFieveOff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
+        app:layout_constraintVertical_bias="0.954" />
+
+    <Button
+        android:id="@+id/relayFieveOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="44dp"
+        android:text="@string/relay_5_on"
+        app:layout_constraintBottom_toTopOf="@+id/relayAllOn"
+        app:layout_constraintEnd_toStartOf="@+id/relayFieveOff"
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/relayFieveOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="48dp"
+        android:text="@string/relay_5_off"
+        app:layout_constraintBottom_toTopOf="@+id/relayAllOff"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/relayAllOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/relay_all_on"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/relayAllOff"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/relayAllOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/relay_all_off"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
