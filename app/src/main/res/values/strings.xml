@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Pool-office-client</string>
     <string name="data_from_sensor">No connection to sensors.</string>
-    <string name="relay_5_on">Relay - 5 - ON</string>
-    <string name="relay_all_on">Relay -ALL- ON</string>
-    <string name="relay_1_off">Relay - 1 - OFF</string>
-    <string name="relay_5_off">Relay - 5 - OFF</string>
-    <string name="relay_all_off">Relay - ALL - OFF</string>
-    <string name="relay_1_on">Relay - 1 - ON</string>
+    <string name="relay_5_on">RELAY-FIVE-ON</string>
+    <string name="relay_all_on">RELAY-ALL-ON</string>
+    <string name="relay_1_off">RELAY-FIRST-OFF</string>
+    <string name="relay_5_off">RELAY-FIVE-OFF</string>
+    <string name="relay_all_off">RELAY-ALL-OFF</string>
+    <string name="relay_1_on">RELAY-FIRST-ON</string>
+    <string name="relay_error">Error relay</string>
 </resources>

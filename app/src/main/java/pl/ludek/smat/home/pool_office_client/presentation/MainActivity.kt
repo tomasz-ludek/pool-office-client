@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,29 +14,38 @@ import pl.ludek.smat.home.pool_office_client.data.live_data.SensorsViewModel
 import pl.ludek.smat.home.pool_office_client.domain.model.PoolInfoData
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var relayFirstOnStr:String    // "RELAY-FIRST-ON"
+    private lateinit var  relayFirstOffStr:String  // "RELAY-FIRST-OFF"
+    private lateinit var relayFiveOnStr:String    // "RELAY-FIVE-ON"
+    private lateinit var relayFiveOffStr:String  // "RELAY-FIVE-OFF"
+    private lateinit var relayAllOnStr:String    // "RELAY-ALL-ON"
+    private lateinit var relayAllOffStr:String   // "RELAY-ALL-OFF"
+    private lateinit var errorRelayStr:String
     private lateinit var dataFromRepository: PoolInfoViewModel
     private lateinit var dataFromRelay: RelayViewModel
     private val dataFromSensor: SensorsViewModel by viewModels()
     private lateinit var sensorDataTextView: TextView
     private lateinit var relayFirstOnButton:Button
-    private lateinit var relayFirstOffButton:Button
     private lateinit var relayFiveOnButton: Button
-    private lateinit var relayFiveOffButton: Button
     private lateinit var relayAllOnButton: Button
-    private lateinit var relayAllOffButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        relayFirstOnStr = getString(R.string.relay_1_on)
+        relayFirstOffStr = getString(R.string.relay_1_off)
+        relayFiveOnStr = getString(R.string.relay_5_on)
+        relayFiveOffStr = getString(R.string.relay_5_off)
+        relayAllOnStr = getString(R.string.relay_all_on)
+        relayAllOffStr = getString(R.string.relay_all_off)
+        errorRelayStr = getString(R.string.relay_error)
         relayFirstOnButton = findViewById(R.id.relayOneOn)
-        relayFirstOffButton = findViewById(R.id.relayOneOff)
         relayFiveOnButton = findViewById(R.id.relayFieveOn)
-        relayFiveOffButton = findViewById(R.id.relayFieveOff)
         relayAllOnButton = findViewById(R.id.relayAllOn)
-        relayAllOffButton = findViewById(R.id.relayAllOff)
         dataFromRepository = ViewModelProvider(this).get(PoolInfoViewModel::class.java)
         dataFromRelay = ViewModelProvider(this).get(RelayViewModel::class.java)
         sensorDataTextView = findViewById(R.id.sensorDataView)
+
         val dataFromSensorObserver = Observer<PoolInfoData>{ inputDataFromSensor ->
             val rez:String =" T1= " + inputDataFromSensor.t1 +
                             " T2= " + inputDataFromSensor.t2 +
@@ -46,11 +56,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         dataFromSensor.currentSensorData.observe(this,dataFromSensorObserver)
         setDataToLiveData()
         relayFirstOnButton.setOnClickListener(this)
-        relayFirstOffButton.setOnClickListener(this)
         relayFiveOnButton.setOnClickListener(this)
-        relayFiveOffButton.setOnClickListener(this)
         relayAllOnButton.setOnClickListener(this)
-        relayAllOffButton.setOnClickListener(this)
     }
 
      private fun setDataToLiveData(){
@@ -61,13 +68,62 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.relayOneOn -> dataFromRelay.postOneRelayOn().observe(this, Observer { println(it) })
-            R.id.relayOneOff -> dataFromRelay.postOneRelayOff().observe(this, Observer { println(it) })
-            R.id.relayFieveOn -> dataFromRelay.postFiveRelayOn().observe(this, Observer { println(it) })
-            R.id.relayFieveOff -> dataFromRelay.postFiveRelayOff().observe(this, Observer { println(it) })
-            R.id.relayAllOn -> dataFromRelay.postAllRelayOn().observe(this, Observer { println(it) })
-            R.id.relayAllOff -> dataFromRelay.postAllRelayOff().observe(this, Observer { println(it) })
+            R.id.relayOneOn ->if(relayFirstOnButton.text == relayFirstOnStr){
+                    dataFromRelay.postOneRelayOn().observe(this, Observer {
+                    if(!it.errorRelay){ relayFirstOnButton.text = relayFirstOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else {
+                dataFromRelay.postOneRelayOff().observe(this, Observer {
+                    if(!it.errorRelay){relayFirstOnButton.text = relayFirstOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+
+            R.id.relayFieveOn -> if(relayFiveOnButton.text == relayFiveOnStr){
+                dataFromRelay.postFiveRelayOn().observe(this, Observer {
+                    if (!it.errorRelay){
+                        relayFiveOnButton.text = relayFiveOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else{
+                dataFromRelay.postFiveRelayOff().observe(this, Observer {
+                    if(!it.errorRelay){relayFiveOnButton.text = relayFiveOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+
+            R.id.relayAllOn -> if(relayAllOnButton.text == relayAllOnStr){
+                dataFromRelay.postAllRelayOn().observe(this, Observer {
+                    if (!it.errorRelay){
+                        relayAllOnButton.text = relayAllOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else{
+                dataFromRelay.postAllRelayOff().observe(this, Observer {
+                    if(!it.errorRelay){relayAllOnButton.text = relayAllOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
         }
+    }
+
+    private  fun showToast(text:String){
+        val duration = Toast.LENGTH_SHORT
+        val toast = Toast.makeText(applicationContext, text, duration)
+        toast.show()
     }
 }
 
