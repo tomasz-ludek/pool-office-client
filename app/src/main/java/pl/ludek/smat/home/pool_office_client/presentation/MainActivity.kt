@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var relayAllOnStr:String    // "RELAY-ALL-ON"
     private lateinit var relayAllOffStr:String   // "RELAY-ALL-OFF"
     private lateinit var errorRelayStr:String
+    private lateinit var  errorSensorStr:String
     private lateinit var dataFromRepository: PoolInfoViewModel
     private lateinit var dataFromRelay: RelayViewModel
     private val dataFromSensor: SensorsViewModel by viewModels()
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         relayAllOnStr = getString(R.string.relay_all_on)
         relayAllOffStr = getString(R.string.relay_all_off)
         errorRelayStr = getString(R.string.relay_error)
+        errorSensorStr = getString(R.string.data_from_sensor)
         relayFirstOnButton = findViewById(R.id.relayOneOn)
         relayFiveOnButton = findViewById(R.id.relayFieveOn)
         relayAllOnButton = findViewById(R.id.relayAllOn)
@@ -47,11 +49,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         sensorDataTextView = findViewById(R.id.sensorDataView)
 
         val dataFromSensorObserver = Observer<PoolInfoData>{ inputDataFromSensor ->
-            val rez:String =" T1= " + inputDataFromSensor.t1 +
-                            " T2= " + inputDataFromSensor.t2 +
-                            " T3= " + inputDataFromSensor.t3 +
-                            " P1= " + inputDataFromSensor.p1
-            sensorDataTextView.text = rez
+            if(inputDataFromSensor.p1 == 0.0f && inputDataFromSensor.t1 == 0.0f && inputDataFromSensor.t2 == 0.0f && inputDataFromSensor.t3 == 0.0f){
+                    sensorDataTextView.text = errorSensorStr
+            }else {
+                val rez:String =" T1= " + inputDataFromSensor.t1 +
+                        " T2= " + inputDataFromSensor.t2 +
+                        " T3= " + inputDataFromSensor.t3 +
+                        " P1= " + inputDataFromSensor.p1
+                sensorDataTextView.text = rez
+            }
         }
         dataFromSensor.currentSensorData.observe(this,dataFromSensorObserver)
         setDataToLiveData()
@@ -126,6 +132,3 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         toast.show()
     }
 }
-
-
-

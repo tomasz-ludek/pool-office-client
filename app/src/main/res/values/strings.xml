@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Pool-office-client</string>
     <string name="data_from_sensor">No connection to sensors.</string>
+    <string name="data_from_server">No connection to server.</string>
     <string name="relay_5_on">RELAY-FIVE-ON</string>
     <string name="relay_all_on">RELAY-ALL-ON</string>
     <string name="relay_1_off">RELAY-FIRST-OFF</string>
