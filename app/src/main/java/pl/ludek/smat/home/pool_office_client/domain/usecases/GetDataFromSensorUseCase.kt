@@ -2,14 +2,14 @@ package pl.ludek.smat.home.pool_office_client.domain.usecases
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import pl.ludek.smat.home.pool_office_client.data.apiservice.ApiModule
+import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoClient
 import pl.ludek.smat.home.pool_office_client.domain.model.PoolInfoData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class GetDataFromSensorUseCase (): SingleUseCase<PoolInfoData> {
-    private var client = ApiModule.retrofitService
+    private var client = PoolInfoClient
     override fun execute(): MutableLiveData<PoolInfoData> {
         var result = MutableLiveData<PoolInfoData>()
         client.getSensorData().enqueue(object : Callback<PoolInfoData> {

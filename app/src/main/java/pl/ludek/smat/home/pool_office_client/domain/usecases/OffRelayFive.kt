@@ -2,17 +2,18 @@ package pl.ludek.smat.home.pool_office_client.domain.usecases
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import pl.ludek.smat.home.pool_office_client.data.apiservice.ApiModule
+import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoClient
 import pl.ludek.smat.home.pool_office_client.domain.model.RelayData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class OffRelayFive: SingleUseCaseButton {
-    private var client = ApiModule.retrofitService
+    private var client = PoolInfoClient
+    private val relayState:Boolean = false
     override fun execute(): MutableLiveData<RelayData> {
         var result = MutableLiveData<RelayData>()
-        client.postRelayFiveOff().enqueue(object : Callback<RelayData> {
+        client.switchFive(relayState).enqueue(object : Callback<RelayData> {
             override fun onResponse(call: Call<RelayData>, response: Response<RelayData>) {
                 if(response.isSuccessful){
                     result.value = response.body()
