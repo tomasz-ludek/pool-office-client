@@ -11,9 +11,10 @@ import retrofit2.Response
 class OnRelayFive: SingleUseCaseButton{
     private var client = PoolInfoClient
     private val relayState:Boolean = true
+    private val relayId: Int = 5
     override fun execute(): MutableLiveData<RelayData> {
         var result = MutableLiveData<RelayData>()
-        client.switchFive(relayState).enqueue(object : Callback<RelayData> {
+        client.switchRelay(relayId, relayState).enqueue(object : Callback<RelayData> {
             override fun onResponse(call: Call<RelayData>, response: Response<RelayData>) {
                 if(response.isSuccessful){
                     result.value = response.body()

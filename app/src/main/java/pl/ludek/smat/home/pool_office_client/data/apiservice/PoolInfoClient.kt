@@ -16,19 +16,9 @@ object PoolInfoClient {
 
     private val service: ApiPoolInfoService = retrofit.create(ApiPoolInfoService::class.java)
 
-    fun switchFirst(onOff: Boolean): Call<RelayData> {
+    fun switchRelay(relayID:Int, onOff: Boolean): Call<RelayData> {
         val state = if(onOff) 1 else 0
-        return service.switchRelay(0, state)
-    }
-
-    fun switchFive(onOff: Boolean): Call<RelayData> {
-        val state = if(onOff) 1 else 0
-        return service.switchRelay(5, state)
-    }
-
-    fun switchAll(onOff: Boolean): Call<RelayData> {
-        val state = if(onOff) 1 else 0
-        return service.switchRelay(256, state)
+        return service.switchRelay(relayID, state)
     }
 
     fun getSensorData(): Call<PoolInfoData> {

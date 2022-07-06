@@ -11,10 +11,11 @@ import retrofit2.Response
 class OffRelayAll: SingleUseCaseButton {
     private var client = PoolInfoClient
     private val relayState:Boolean = false
+    private val relayId: Int = 256
     override fun execute(): MutableLiveData<RelayData> {
 
         var result = MutableLiveData<RelayData>()
-        client.switchAll(relayState).enqueue(object : Callback<RelayData> {
+        client.switchRelay(relayId,relayState).enqueue(object : Callback<RelayData> {
             override fun onResponse(call: Call<RelayData>, response: Response<RelayData>) {
                 if(response.isSuccessful){
                     result.value = response.body()
