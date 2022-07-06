@@ -6,6 +6,10 @@ plugins {
 android {
     compileSdk 32
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "pl.ludek.smat.home.pool_office_client"
         minSdk 21
