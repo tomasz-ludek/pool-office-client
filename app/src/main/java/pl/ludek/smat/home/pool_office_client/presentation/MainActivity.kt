@@ -104,7 +104,6 @@ class MainActivity : AppCompatActivity() {
      }
 
     private fun initView(){
-        setContentView(R.layout.activity_main)
         relayFirstOnStr = getString(R.string.relay_1_on)
         relayFirstOffStr = getString(R.string.relay_1_off)
         relayFiveOnStr = getString(R.string.relay_5_on)
