@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var errorRelayStr:String
     private lateinit var  errorSensorStr:String
     private lateinit var dataFromRepository: PoolInfoViewModel
-    private lateinit var dataFromRelay: RelayViewModel
+    private lateinit var dataFromRelay:MainActivityViewModel
     private val dataFromSensor: SensorsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,25 +32,25 @@ class MainActivity : AppCompatActivity() {
             if(inputDataFromSensor.p1 == 0.0f && inputDataFromSensor.t1 == 0.0f && inputDataFromSensor.t2 == 0.0f && inputDataFromSensor.t3 == 0.0f){
                  binding.sensorDataView.text = errorSensorStr
             }else {
-                val rez:String =" T1= " + inputDataFromSensor.t1 +
+                binding.sensorDataView.text =
+                        " T1= " + inputDataFromSensor.t1 +
                         " T2= " + inputDataFromSensor.t2 +
                         " T3= " + inputDataFromSensor.t3 +
                         " P1= " + inputDataFromSensor.p1
-                binding.sensorDataView.text = rez
             }
         }
         dataFromSensor.currentSensorData.observe(this,dataFromSensorObserver)
-        setDataToLiveData()
+        dataFromRelay.setDataToLiveData(dataFromRepository, dataFromSensor, this)
         binding.relayOneOn.setOnClickListener {
             if( binding.relayOneOn.text == relayFirstOnStr){
-                dataFromRelay.postOneRelayOn().observe(this, Observer {
+                dataFromRelay.postOnRelayFirst().observe(this, Observer {
                     if(!it.errorRelay){ binding.relayOneOn.text = relayFirstOffStr
                     }else{
                         showToast(errorRelayStr)
                     }
                 })
             }else {
-                dataFromRelay.postOneRelayOff().observe(this, Observer {
+                dataFromRelay.postOffRelayFirst().observe(this, Observer {
                     if(!it.errorRelay){binding.relayOneOn.text = relayFirstOnStr
                     }else{
                         showToast(errorRelayStr)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.relayFieveOn.setOnClickListener {
             if(binding.relayFieveOn.text == relayFiveOnStr){
-                dataFromRelay.postFiveRelayOn().observe(this, Observer {
+                dataFromRelay.postOnRelayFive().observe(this, Observer {
                     if (!it.errorRelay){
                         binding.relayFieveOn.text = relayFiveOffStr
                     }else{
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
             }else{
-                dataFromRelay.postFiveRelayOff().observe(this, Observer {
+                dataFromRelay.postOffRelayFive().observe(this, Observer {
                     if(!it.errorRelay){binding.relayFieveOn.text = relayFiveOnStr
                     }else{
                         showToast(errorRelayStr)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.relayAllOn.setOnClickListener {
             if(binding.relayAllOn.text == relayAllOnStr){
-                dataFromRelay.postAllRelayOn().observe(this, Observer {
+                dataFromRelay.postOnRelayAll().observe(this, Observer {
                     if (!it.errorRelay){
                         binding.relayAllOn.text = relayAllOffStr
                     }else{
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
             }else{
-                dataFromRelay.postAllRelayOff().observe(this, Observer {
+                dataFromRelay.postOffRelayAll().observe(this, Observer {
                     if(!it.errorRelay){binding.relayAllOn.text = relayAllOnStr
                     }else{
                         showToast(errorRelayStr)
@@ -96,12 +96,6 @@ class MainActivity : AppCompatActivity() {
         }
         setContentView(binding.root)
     }
-
-    private fun setDataToLiveData(){
-         dataFromRepository.getDataFromLocalStorage().observe(this, Observer {
-             dataFromSensor.setPoolInfoData(it)
-         })
-     }
 
     private fun initView(){
         relayFirstOnStr = getString(R.string.relay_1_on)
@@ -113,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         errorRelayStr = getString(R.string.relay_error)
         errorSensorStr = getString(R.string.data_from_sensor)
         dataFromRepository = ViewModelProvider(this).get(PoolInfoViewModel::class.java)
-        dataFromRelay = ViewModelProvider(this).get(RelayViewModel::class.java)
+        dataFromRelay = ViewModelProvider(this).get(MainActivityViewModel::class.java)
     }
 
     private  fun showToast(text:String){
