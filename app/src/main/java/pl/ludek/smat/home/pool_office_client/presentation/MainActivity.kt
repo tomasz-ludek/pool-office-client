@@ -196,13 +196,30 @@ class MainActivity : AppCompatActivity() {
                 dataFromRelay.postOnRelayAll().observe(this, Observer {
                     if (!it.errorRelay){
                         binding.relayAllOn.text = relayAllOffStr
+                        binding.relayOneOn.text = relayFirstOffStr
+                        binding.relaySecondOn.text = relaySecondOffStr
+                        binding.relayThirdOn.text = relayThirdOffStr
+                        binding.relayFourthOn.text = relayForthOffStr
+                        binding.relayFieveOn.text = relayFifthOffStr
+                        binding.relaySixthOn.text = relaySixthOffStr
+                        binding.relaySeventhOn.text = relaySeventhOffStr
+                        binding.relayEighthOn.text = relayEighthOffStr
                     }else{
                         showToast(errorRelayStr)
                     }
                 })
             }else{
                 dataFromRelay.postOffRelayAll().observe(this, Observer {
-                    if(!it.errorRelay){binding.relayAllOn.text = relayAllOnStr
+                    if(!it.errorRelay){
+                        binding.relayAllOn.text = relayAllOnStr
+                        binding.relayOneOn.text = relayFirstOnStr
+                        binding.relaySecondOn.text = relaySecondOnStr
+                        binding.relayThirdOn.text = relayThirdOnStr
+                        binding.relayFourthOn.text = relayForthOnStr
+                        binding.relayFieveOn.text = relayFifthOnStr
+                        binding.relaySixthOn.text = relaySixthOnStr
+                        binding.relaySeventhOn.text = relaySeventhOnStr
+                        binding.relayEighthOn.text = relayEighthOnStr
                     }else{
                         showToast(errorRelayStr)
                     }
