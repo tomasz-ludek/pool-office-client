@@ -12,12 +12,24 @@ import pl.ludek.smat.home.pool_office_client.databinding.ActivityMainBinding
 import pl.ludek.smat.home.pool_office_client.domain.model.PoolInfoData
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var relayFirstOnStr:String    // "RELAY-FIRST-ON"
-    private lateinit var  relayFirstOffStr:String  // "RELAY-FIRST-OFF"
-    private lateinit var relayFiveOnStr:String    // "RELAY-FIVE-ON"
-    private lateinit var relayFiveOffStr:String  // "RELAY-FIVE-OFF"
-    private lateinit var relayAllOnStr:String    // "RELAY-ALL-ON"
-    private lateinit var relayAllOffStr:String   // "RELAY-ALL-OFF"
+    private lateinit var relayFirstOnStr:String
+    private lateinit var  relayFirstOffStr:String
+    private lateinit var relaySecondOnStr:String
+    private lateinit var relaySecondOffStr:String
+    private lateinit var relayThirdOnStr:String
+    private lateinit var relayThirdOffStr:String
+    private lateinit var relayForthOnStr:String
+    private lateinit var relayForthOffStr:String
+    private lateinit var relayFifthOnStr:String
+    private lateinit var relayFifthOffStr:String
+    private lateinit var relaySixthOnStr:String
+    private lateinit var relaySixthOffStr:String
+    private lateinit var relaySeventhOnStr:String
+    private lateinit var relaySeventhOffStr:String
+    private lateinit var relayEighthOnStr:String
+    private lateinit var relayEighthOffStr:String
+    private lateinit var relayAllOnStr:String
+    private lateinit var relayAllOffStr:String
     private lateinit var errorRelayStr:String
     private lateinit var  errorSensorStr:String
     private lateinit var dataFromRepository: PoolInfoViewModel
@@ -41,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
         dataFromSensor.currentSensorData.observe(this,dataFromSensorObserver)
         dataFromRelay.setDataToLiveData(dataFromRepository, dataFromSensor, this)
+
         binding.relayOneOn.setOnClickListener {
             if( binding.relayOneOn.text == relayFirstOnStr){
                 dataFromRelay.postOnRelayFirst().observe(this, Observer {
@@ -58,18 +71,120 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         }
+        binding.relaySecondOn.setOnClickListener {
+            if( binding.relaySecondOn.text == relaySecondOnStr){
+                dataFromRelay.postOnRelaySecond().observe(this, Observer {
+                    if(!it.errorRelay){ binding.relaySecondOn.text = relaySecondOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else {
+                dataFromRelay.postOffRelaySecond().observe(this, Observer {
+                    if(!it.errorRelay){binding.relaySecondOn.text = relaySecondOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+        }
+        binding.relayThirdOn.setOnClickListener {
+            if( binding.relayThirdOn.text == relayThirdOnStr){
+                dataFromRelay.postOnRelayThird().observe(this, Observer {
+                    if(!it.errorRelay){ binding.relayThirdOn.text = relayThirdOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else {
+                dataFromRelay.postOffRelayThird().observe(this, Observer {
+                    if(!it.errorRelay){binding.relayThirdOn.text = relayThirdOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+        }
+        binding.relayFourthOn.setOnClickListener {
+            if( binding.relayFourthOn.text == relayForthOnStr){
+                dataFromRelay.postOnRelayForth().observe(this, Observer {
+                    if(!it.errorRelay){ binding.relayFourthOn.text = relayForthOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else {
+                dataFromRelay.postOffRelayForth().observe(this, Observer {
+                    if(!it.errorRelay){binding.relayFourthOn.text = relayForthOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+        }
         binding.relayFieveOn.setOnClickListener {
-            if(binding.relayFieveOn.text == relayFiveOnStr){
+            if(binding.relayFieveOn.text == relayFifthOnStr){
                 dataFromRelay.postOnRelayFive().observe(this, Observer {
                     if (!it.errorRelay){
-                        binding.relayFieveOn.text = relayFiveOffStr
+                        binding.relayFieveOn.text = relayFifthOffStr
                     }else{
                         showToast(errorRelayStr)
                     }
                 })
             }else{
                 dataFromRelay.postOffRelayFive().observe(this, Observer {
-                    if(!it.errorRelay){binding.relayFieveOn.text = relayFiveOnStr
+                    if(!it.errorRelay){binding.relayFieveOn.text = relayFifthOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+        }
+        binding.relaySixthOn.setOnClickListener {
+            if( binding.relaySixthOn.text == relaySixthOnStr){
+                dataFromRelay.postOnRelaySixth().observe(this, Observer {
+                    if(!it.errorRelay){ binding.relaySixthOn.text = relaySixthOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else {
+                dataFromRelay.postOffRelaySixth().observe(this, Observer {
+                    if(!it.errorRelay){binding.relaySixthOn.text = relaySixthOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+        }
+        binding.relaySeventhOn.setOnClickListener {
+            if( binding.relaySeventhOn.text == relaySeventhOnStr){
+                dataFromRelay.postOnRelaySeventh().observe(this, Observer {
+                    if(!it.errorRelay){ binding.relaySeventhOn.text = relaySeventhOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else {
+                dataFromRelay.postOffRelaySeventh().observe(this, Observer {
+                    if(!it.errorRelay){binding.relaySeventhOn.text = relaySeventhOnStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }
+        }
+        binding.relayEighthOn.setOnClickListener {
+            if( binding.relayEighthOn.text == relayEighthOnStr){
+                dataFromRelay.postOnRelayEight().observe(this, Observer {
+                    if(!it.errorRelay){ binding.relayEighthOn.text = relayEighthOffStr
+                    }else{
+                        showToast(errorRelayStr)
+                    }
+                })
+            }else {
+                dataFromRelay.postOffRelayEighth().observe(this, Observer {
+                    if(!it.errorRelay){binding.relayEighthOn.text = relayEighthOnStr
                     }else{
                         showToast(errorRelayStr)
                     }
@@ -81,13 +196,30 @@ class MainActivity : AppCompatActivity() {
                 dataFromRelay.postOnRelayAll().observe(this, Observer {
                     if (!it.errorRelay){
                         binding.relayAllOn.text = relayAllOffStr
+                        binding.relayOneOn.text = relayFirstOffStr
+                        binding.relaySecondOn.text = relaySecondOffStr
+                        binding.relayThirdOn.text = relayThirdOffStr
+                        binding.relayFourthOn.text = relayForthOffStr
+                        binding.relayFieveOn.text = relayFifthOffStr
+                        binding.relaySixthOn.text = relaySixthOffStr
+                        binding.relaySeventhOn.text = relaySeventhOffStr
+                        binding.relayEighthOn.text = relayEighthOffStr
                     }else{
                         showToast(errorRelayStr)
                     }
                 })
             }else{
                 dataFromRelay.postOffRelayAll().observe(this, Observer {
-                    if(!it.errorRelay){binding.relayAllOn.text = relayAllOnStr
+                    if(!it.errorRelay){
+                        binding.relayAllOn.text = relayAllOnStr
+                        binding.relayOneOn.text = relayFirstOnStr
+                        binding.relaySecondOn.text = relaySecondOnStr
+                        binding.relayThirdOn.text = relayThirdOnStr
+                        binding.relayFourthOn.text = relayForthOnStr
+                        binding.relayFieveOn.text = relayFifthOnStr
+                        binding.relaySixthOn.text = relaySixthOnStr
+                        binding.relaySeventhOn.text = relaySeventhOnStr
+                        binding.relayEighthOn.text = relayEighthOnStr
                     }else{
                         showToast(errorRelayStr)
                     }
@@ -100,8 +232,20 @@ class MainActivity : AppCompatActivity() {
     private fun initView(){
         relayFirstOnStr = getString(R.string.relay_1_on)
         relayFirstOffStr = getString(R.string.relay_1_off)
-        relayFiveOnStr = getString(R.string.relay_5_on)
-        relayFiveOffStr = getString(R.string.relay_5_off)
+        relaySecondOnStr = getString(R.string.relay_second_on)
+        relaySecondOffStr = getString(R.string.relay_second_off)
+        relayThirdOnStr = getString(R.string.relay_third_on)
+        relayThirdOffStr = getString(R.string.relay_third_off)
+        relayForthOnStr = getString(R.string.relay_fourth_on)
+        relayForthOffStr = getString(R.string.relay_fourth_off)
+        relayFifthOnStr = getString(R.string.relay_5_on)
+        relayFifthOffStr = getString(R.string.relay_5_off)
+        relaySixthOnStr = getString(R.string.relay_sixth_on)
+        relaySixthOffStr = getString(R.string.relay_sixth_off)
+        relaySeventhOnStr = getString(R.string.relay_seventh_on)
+        relaySeventhOffStr = getString(R.string.relay_seventh_off)
+        relayEighthOnStr = getString(R.string.relay_eighth_on)
+        relayEighthOffStr = getString(R.string.relay_eighth_off)
         relayAllOnStr = getString(R.string.relay_all_on)
         relayAllOffStr = getString(R.string.relay_all_off)
         errorRelayStr = getString(R.string.relay_error)

@@ -14,8 +14,14 @@ import retrofit2.Response
 class MainActivityViewModel : ViewModel() {
     private val relayStateOn:Boolean = true
     private val relayStateOff:Boolean = false
-    private val relayIdFirst: Int = 0
-    private val relayIdFive: Int = 5
+    private val relayIdFirst: Int = 1
+    private val relayIdSecond: Int = 2
+    private val relayIdThird: Int = 3
+    private val relayIdForth: Int = 4
+    private val relayIdFifth: Int = 5
+    private val relayIdSixth: Int = 6
+    private val relayIdSeventh: Int = 7
+    private val relayIdEighth: Int = 8
     private val relayIdAll: Int = 256
 
      fun setDataToLiveData(
@@ -36,8 +42,32 @@ class MainActivityViewModel : ViewModel() {
         return receiveDataFromRelay(relayIdFirst,relayStateOff)
     }
 
+    fun postOffRelaySecond(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdSecond,relayStateOff)
+    }
+
+    fun postOffRelayThird(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdThird,relayStateOff)
+    }
+
+    fun postOffRelayForth(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdForth,relayStateOff)
+    }
+
      fun postOffRelayFive(): MutableLiveData<RelayData> {
-        return receiveDataFromRelay(relayIdFive,relayStateOff)
+        return receiveDataFromRelay(relayIdFifth,relayStateOff)
+    }
+
+    fun postOffRelaySixth(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdSixth,relayStateOff)
+    }
+
+    fun postOffRelaySeventh(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdSeventh,relayStateOff)
+    }
+
+    fun postOffRelayEighth(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdEighth,relayStateOff)
     }
 
      fun postOnRelayAll(): MutableLiveData<RelayData> {
@@ -48,8 +78,32 @@ class MainActivityViewModel : ViewModel() {
         return receiveDataFromRelay(relayIdFirst,relayStateOn)
     }
 
+    fun postOnRelaySecond(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdSecond,relayStateOn)
+    }
+
+    fun postOnRelayThird(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdThird,relayStateOn)
+    }
+
+    fun postOnRelayForth(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdForth,relayStateOn)
+    }
+
      fun postOnRelayFive(): MutableLiveData<RelayData> {
-        return receiveDataFromRelay(relayIdFive,relayStateOn)
+        return receiveDataFromRelay(relayIdFifth,relayStateOn)
+    }
+
+    fun postOnRelaySixth(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdSixth,relayStateOn)
+    }
+
+    fun postOnRelaySeventh(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdSeventh,relayStateOn)
+    }
+
+    fun postOnRelayEight(): MutableLiveData<RelayData> {
+        return receiveDataFromRelay(relayIdEighth,relayStateOn)
     }
 
     private fun receiveDataFromRelay(relayId:Int, relayState:Boolean): MutableLiveData<RelayData> {
