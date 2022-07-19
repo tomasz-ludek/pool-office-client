@@ -11,4 +11,5 @@ class SensorsViewModel: ViewModel() {
     fun setPoolInfoData(data: PoolInfoData){
           currentSensorData.value = data
     }
+
 }
