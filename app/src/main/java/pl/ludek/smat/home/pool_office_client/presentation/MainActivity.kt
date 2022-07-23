@@ -16,6 +16,7 @@ import pl.ludek.smat.home.pool_office_client.domain.model.PoolInfoData
 class MainActivity : AppCompatActivity() {
     private lateinit var errorRelayStr:String
     private lateinit var  errorSensorStr:String
+    private var launchPermission: Boolean = true
     private lateinit var dataFromRepository: PoolInfoViewModel
     private lateinit var dataFromRelay:MainActivityViewModel
     private lateinit var dataInitialRelay: InitializationStateRelayViewModel
@@ -50,14 +51,19 @@ class MainActivity : AppCompatActivity() {
                 binding.relayAllOn.isEnabled = false
                 binding.relayAllOff.isEnabled = false
             }else{
-                binding.relayFirst.isChecked = inputRelayState.relayFirst
-                binding.relaySecond.isChecked = inputRelayState.relaySecond
-                binding.relayThird.isChecked = inputRelayState.relayThird
-                binding.relayFourth.isChecked = inputRelayState.relayFourth
-                binding.relayFifth.isChecked = inputRelayState.relayFifth
-                binding.relaySixth.isChecked = inputRelayState.relaySixth
-                binding.relaySeventh.isChecked = inputRelayState.relaySeventh
-                binding.relayEighth.isChecked = inputRelayState.relayEighth
+                if (launchPermission){
+                    launchPermission = false
+                    binding.relayFirst.isChecked = inputRelayState.relayFirst
+                    binding.relaySecond.isChecked = inputRelayState.relaySecond
+                    binding.relayThird.isChecked = inputRelayState.relayThird
+                    binding.relayFourth.isChecked = inputRelayState.relayFourth
+                    binding.relayFifth.isChecked = inputRelayState.relayFifth
+                    binding.relaySixth.isChecked = inputRelayState.relaySixth
+                    binding.relaySeventh.isChecked = inputRelayState.relaySeventh
+                    binding.relayEighth.isChecked = inputRelayState.relayEighth
+                }
+                launchPermission = true
+
             }
 
         }
@@ -70,146 +76,162 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.relayFirst.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelayFirst().observe(this, Observer {
-                    if(it.errorRelay){
-                       compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelayFirst().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelayFirst().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelayFirst().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
         binding.relaySecond.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelaySecond().observe(this, Observer {
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelaySecond().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelaySecond().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelaySecond().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
         binding.relayThird.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelayThird().observe(this, Observer {
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelayThird().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelayThird().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelayThird().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
         binding.relayFourth.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelayForth().observe(this, Observer {
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelayForth().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelayForth().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelayForth().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
         binding.relayFifth.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelayFive().observe(this, Observer {
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelayFive().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelayFive().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelayFive().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
         binding.relaySixth.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelaySixth().observe(this, Observer {
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelaySixth().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelaySixth().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelaySixth().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
         binding.relaySeventh.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelaySeventh().observe(this, Observer {
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelaySeventh().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelaySeventh().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelaySeventh().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
         binding.relayEighth.setOnCheckedChangeListener { compoundButton, b ->
-            if(b){
-                dataFromRelay.postOnRelayEight().observe(this, Observer {
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
-            }else{
-                dataFromRelay.postOffRelayEighth().observe(this,Observer{
-                    if(it.errorRelay){
-                        compoundButton.isEnabled = false
-                        showToast(errorRelayStr)
-                    }
-                })
+            if(launchPermission){
+                if(b){
+                    dataFromRelay.postOnRelayEight().observe(this, Observer {
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }else{
+                    dataFromRelay.postOffRelayEighth().observe(this,Observer{
+                        if(it.errorRelay){
+                            compoundButton.isEnabled = false
+                            showToast(errorRelayStr)
+                        }
+                    })
+                }
             }
         }
 
@@ -218,6 +240,19 @@ class MainActivity : AppCompatActivity() {
                 if(it.errorRelay){
                     binding.relayAllOn.isEnabled = false
                     showToast(errorRelayStr)
+                }else{
+                    if(launchPermission){
+                        launchPermission = false
+                        binding.relayFirst.isChecked = true
+                        binding.relaySecond.isChecked = true
+                        binding.relayThird.isChecked = true
+                        binding.relayFourth.isChecked = true
+                        binding.relayFifth.isChecked = true
+                        binding.relaySixth.isChecked = true
+                        binding.relaySeventh.isChecked = true
+                        binding.relayEighth.isChecked = true
+                    }
+                    launchPermission = true
                 }
             })
         }
@@ -227,6 +262,19 @@ class MainActivity : AppCompatActivity() {
                 if(it.errorRelay){
                     binding.relayAllOff.isEnabled = false
                     showToast(errorRelayStr)
+                }else{
+                    if(launchPermission){
+                        launchPermission = false
+                        binding.relayFirst.isChecked = false
+                        binding.relaySecond.isChecked = false
+                        binding.relayThird.isChecked = false
+                        binding.relayFourth.isChecked = false
+                        binding.relayFifth.isChecked = false
+                        binding.relaySixth.isChecked = false
+                        binding.relaySeventh.isChecked = false
+                        binding.relayEighth.isChecked = false
+                    }
+                    launchPermission = true
                 }
             })
         }
