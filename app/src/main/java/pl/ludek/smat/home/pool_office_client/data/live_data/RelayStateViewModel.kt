@@ -11,33 +11,4 @@ class RelayStateViewModel: ViewModel() {
     fun setRelayState(data: InitializationStateRelay){
         currentRelayState.value = data
     }
-    fun setFirstChannel(data: Boolean){
-        val state = currentRelayState.value
-        if (state != null) {
-            currentRelayState.value = InitializationStateRelay(data,
-                state.relaySecond,
-                state.relayThird,
-                state.relayFourth,
-                state.relayFifth,
-                state.relaySixth,
-                state.relaySeventh,
-                state.relayEighth,
-                state.errorRelay)
-        }
-    }
-    fun setSecondChannel(data: Boolean){
-        val state = currentRelayState.value
-        if (state != null) {
-            currentRelayState.value = InitializationStateRelay(state.relayFirst,
-                data,
-                state.relayThird,
-                state.relayFourth,
-                state.relayFifth,
-                state.relaySixth,
-                state.relaySeventh,
-                state.relayEighth,
-                state.errorRelay)
-        }
-    }
-
 }

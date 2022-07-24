@@ -4,8 +4,6 @@
     <string name="data_from_server">No connection to server.</string>
     <string name="relay_5_on">RELAY-FIFTH</string>
     <string name="relay_all_on">RELAY-ALL-ON</string>
-    <string name="relay_1_off">RELAY-FIRST-OFF</string>
-    <string name="relay_5_off">RELAY-FIFTH-OFF</string>
     <string name="relay_all_off">RELAY-ALL-OFF</string>
     <string name="relay_1_on">RELAY-FIRST</string>
     <string name="relay_error">Error relay</string>
@@ -15,12 +13,6 @@
     <string name="relay_sixth_on">RELAY-SIXTH</string>
     <string name="relay_seventh_on">RELAY-SEVENTH</string>
     <string name="relay_eighth_on">RELAY-EIGHTH</string>
-    <string name="relay_second_off">RELAY-SECOND-OFF</string>
-    <string name="relay_third_off">RELAY-THIRD-OFF</string>
-    <string name="relay_fourth_off">RELAY-FOURTH-OFF</string>
-    <string name="relay_sixth_off">RELAY-SIXTH-OFF</string>
-    <string name="relay_seventh_off">RELAY-SEVENTH-OFF</string>
-    <string name="relay_eighth_off">RELAY-EIGHTH-OFF</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
 </resources>

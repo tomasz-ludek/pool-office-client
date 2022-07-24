@@ -2,6 +2,7 @@ package pl.ludek.smat.home.pool_office_client.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -22,11 +23,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dataInitialRelay: InitializationStateRelayViewModel
     private val dataFromSensor: SensorsViewModel by viewModels()
     private val relayState: RelayStateViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        val binding = ActivityMainBinding.inflate(layoutInflater)
         val dataFromSensorObserver = Observer<PoolInfoData>{ inputDataFromSensor ->
             if(inputDataFromSensor.p1 == 0.0f && inputDataFromSensor.t1 == 0.0f && inputDataFromSensor.t2 == 0.0f && inputDataFromSensor.t3 == 0.0f){
                  binding.sensorDataView.text = errorSensorStr
@@ -63,9 +64,7 @@ class MainActivity : AppCompatActivity() {
                     binding.relayEighth.isChecked = inputRelayState.relayEighth
                 }
                 launchPermission = true
-
             }
-
         }
         dataFromSensor.currentSensorData.observe(this,dataFromSensorObserver)
         dataFromRelay.setDataToLiveData(dataFromRepository, dataFromSensor, this)
@@ -80,15 +79,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelayFirst().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelayFirst().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -100,15 +97,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelaySecond().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelaySecond().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -120,15 +115,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelayThird().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelayThird().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -140,15 +133,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelayForth().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelayForth().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -160,15 +151,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelayFive().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelayFive().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -180,15 +169,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelaySixth().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelaySixth().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -200,15 +187,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelaySeventh().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelaySeventh().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -220,15 +205,13 @@ class MainActivity : AppCompatActivity() {
                 if(b){
                     dataFromRelay.postOnRelayEight().observe(this, Observer {
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }else{
                     dataFromRelay.postOffRelayEighth().observe(this,Observer{
                         if(it.errorRelay){
-                            compoundButton.isEnabled = false
-                            showToast(errorRelayStr)
+                            closingSwitch(compoundButton)
                         }
                     })
                 }
@@ -241,18 +224,7 @@ class MainActivity : AppCompatActivity() {
                     binding.relayAllOn.isEnabled = false
                     showToast(errorRelayStr)
                 }else{
-                    if(launchPermission){
-                        launchPermission = false
-                        binding.relayFirst.isChecked = true
-                        binding.relaySecond.isChecked = true
-                        binding.relayThird.isChecked = true
-                        binding.relayFourth.isChecked = true
-                        binding.relayFifth.isChecked = true
-                        binding.relaySixth.isChecked = true
-                        binding.relaySeventh.isChecked = true
-                        binding.relayEighth.isChecked = true
-                    }
-                    launchPermission = true
+                    switchingAllSwitch(true)
                 }
             })
         }
@@ -263,18 +235,7 @@ class MainActivity : AppCompatActivity() {
                     binding.relayAllOff.isEnabled = false
                     showToast(errorRelayStr)
                 }else{
-                    if(launchPermission){
-                        launchPermission = false
-                        binding.relayFirst.isChecked = false
-                        binding.relaySecond.isChecked = false
-                        binding.relayThird.isChecked = false
-                        binding.relayFourth.isChecked = false
-                        binding.relayFifth.isChecked = false
-                        binding.relaySixth.isChecked = false
-                        binding.relaySeventh.isChecked = false
-                        binding.relayEighth.isChecked = false
-                    }
-                    launchPermission = true
+                    switchingAllSwitch(false)
                 }
             })
         }
@@ -287,11 +248,32 @@ class MainActivity : AppCompatActivity() {
         dataFromRepository = ViewModelProvider(this).get(PoolInfoViewModel::class.java)
         dataFromRelay = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         dataInitialRelay = ViewModelProvider(this).get(InitializationStateRelayViewModel::class.java)
+        binding = ActivityMainBinding.inflate(layoutInflater)
     }
 
     private  fun showToast(text:String){
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(applicationContext, text, duration)
         toast.show()
+    }
+
+    private fun switchingAllSwitch(state : Boolean){
+        if(launchPermission){
+            launchPermission = false
+            binding.relayFirst.isChecked = state
+            binding.relaySecond.isChecked = state
+            binding.relayThird.isChecked = state
+            binding.relayFourth.isChecked = state
+            binding.relayFifth.isChecked = state
+            binding.relaySixth.isChecked = state
+            binding.relaySeventh.isChecked = state
+            binding.relayEighth.isChecked = state
+        }
+        launchPermission = true
+    }
+
+    private fun closingSwitch(compoundButton: CompoundButton) {
+        compoundButton.isEnabled = false
+        showToast(errorRelayStr)
     }
 }
