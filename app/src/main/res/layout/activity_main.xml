@@ -26,6 +26,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:text="@string/relay_all_on"
+        android:enabled="false"
         app:layout_constraintEnd_toStartOf="@+id/relayAllOff"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +42,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sensorDataView" />
@@ -55,6 +57,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relayFirst" />
@@ -69,6 +72,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relaySecond" />
@@ -83,6 +87,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relayThird" />
@@ -97,6 +102,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relayFourth" />
@@ -111,6 +117,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relayFifth" />
@@ -125,6 +132,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relaySixth" />
@@ -139,6 +147,7 @@
         android:textOff="@string/off"
         android:textOn="@string/on"
         app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relaySeventh" />
@@ -150,6 +159,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:text="@string/relay_all_off"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

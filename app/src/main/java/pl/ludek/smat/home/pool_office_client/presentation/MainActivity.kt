@@ -41,17 +41,9 @@ class MainActivity : AppCompatActivity() {
         }
         val relayStateObserver = Observer<InitializationStateRelay> { inputRelayState ->
             if(inputRelayState.errorRelay){
-                binding.relayFirst.isEnabled = false
-                binding.relaySecond.isEnabled = false
-                binding.relayThird.isEnabled = false
-                binding.relayFourth.isEnabled = false
-                binding.relayFifth.isEnabled = false
-                binding.relaySixth.isEnabled = false
-                binding.relaySeventh.isEnabled = false
-                binding.relayEighth.isEnabled = false
-                binding.relayAllOn.isEnabled = false
-                binding.relayAllOff.isEnabled = false
+                showToast(errorRelayStr)
             }else{
+                activatedAllSwitchAndButton()
                 if (launchPermission){
                     launchPermission = false
                     binding.relayFirst.isChecked = inputRelayState.relayFirst
@@ -275,5 +267,18 @@ class MainActivity : AppCompatActivity() {
     private fun closingSwitch(compoundButton: CompoundButton) {
         compoundButton.isEnabled = false
         showToast(errorRelayStr)
+    }
+
+    private fun activatedAllSwitchAndButton(){
+        binding.relayFirst.isEnabled = true
+        binding.relaySecond.isEnabled = true
+        binding.relayThird.isEnabled = true
+        binding.relayFourth.isEnabled = true
+        binding.relayFifth.isEnabled = true
+        binding.relaySixth.isEnabled = true
+        binding.relaySeventh.isEnabled = true
+        binding.relayEighth.isEnabled = true
+        binding.relayAllOn.isEnabled = true
+        binding.relayAllOff.isEnabled = true
     }
 }
