@@ -40,20 +40,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
         val relayStateObserver = Observer<InitializationStateRelay> { inputRelayState ->
-            if(inputRelayState.errorRelay){
+            if(inputRelayState.relayAnswer[8]){
                 showToast(errorRelayStr)
             }else{
                 activatedAllSwitchAndButton()
                 if (launchPermission){
                     launchPermission = false
-                    binding.relayFirst.isChecked = inputRelayState.relayFirst
-                    binding.relaySecond.isChecked = inputRelayState.relaySecond
-                    binding.relayThird.isChecked = inputRelayState.relayThird
-                    binding.relayFourth.isChecked = inputRelayState.relayFourth
-                    binding.relayFifth.isChecked = inputRelayState.relayFifth
-                    binding.relaySixth.isChecked = inputRelayState.relaySixth
-                    binding.relaySeventh.isChecked = inputRelayState.relaySeventh
-                    binding.relayEighth.isChecked = inputRelayState.relayEighth
+                    binding.relayFirst.isChecked = inputRelayState.relayAnswer.get(0)
+                    binding.relaySecond.isChecked = inputRelayState.relayAnswer.get(1)
+                    binding.relayThird.isChecked = inputRelayState.relayAnswer.get(2)
+                    binding.relayFourth.isChecked = inputRelayState.relayAnswer.get(3)
+                    binding.relayFifth.isChecked = inputRelayState.relayAnswer.get(4)
+                    binding.relaySixth.isChecked = inputRelayState.relayAnswer.get(5)
+                    binding.relaySeventh.isChecked = inputRelayState.relayAnswer.get(6)
+                    binding.relayEighth.isChecked = inputRelayState.relayAnswer.get(7)
                 }
                 launchPermission = true
             }
