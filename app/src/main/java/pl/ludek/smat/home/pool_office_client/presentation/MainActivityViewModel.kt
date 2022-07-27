@@ -14,14 +14,14 @@ import retrofit2.Response
 class MainActivityViewModel : ViewModel() {
     private val relayStateOn:Boolean = true
     private val relayStateOff:Boolean = false
-    private val relayIdFirst: Int = 1
-    private val relayIdSecond: Int = 2
-    private val relayIdThird: Int = 3
-    private val relayIdForth: Int = 4
-    private val relayIdFifth: Int = 5
-    private val relayIdSixth: Int = 6
-    private val relayIdSeventh: Int = 7
-    private val relayIdEighth: Int = 8
+    private val relayIdFirst: Int = 0
+    private val relayIdSecond: Int = 1
+    private val relayIdThird: Int = 2
+    private val relayIdForth: Int = 3
+    private val relayIdFifth: Int = 4
+    private val relayIdSixth: Int = 5
+    private val relayIdSeventh: Int = 6
+    private val relayIdEighth: Int = 7
     private val relayIdAll: Int = 256
 
      fun setDataToLiveData(

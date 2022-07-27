@@ -19,119 +19,150 @@
         app:layout_constraintVertical_bias="0.043" />
 
     <Button
-        android:id="@+id/relayOneOn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/relay_1_on"
-        app:layout_constraintBottom_toTopOf="@+id/relaySecondOn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/relayFieveOn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/relay_5_on"
-        app:layout_constraintBottom_toTopOf="@+id/relaySixthOn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
         android:id="@+id/relayAllOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/relay_all_on"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:enabled="false"
+        app:layout_constraintEnd_toStartOf="@+id/relayAllOff"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/relayEighth" />
 
-    <Button
-        android:id="@+id/relaySecondOn"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relayFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="100dp"
+        android:minHeight="48dp"
+        android:text="@string/relay_1_on"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensorDataView" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relaySecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
         android:text="@string/relay_second_on"
-        app:layout_constraintBottom_toTopOf="@+id/relayThirdOn"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/relayFirst" />
 
-    <Button
-        android:id="@+id/relayThirdOn"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relayThird"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
         android:text="@string/relay_third_on"
-        app:layout_constraintBottom_toTopOf="@+id/relayFourthOn"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/relaySecond" />
 
-    <Button
-        android:id="@+id/relayFourthOn"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relayFourth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
         android:text="@string/relay_fourth_on"
-        app:layout_constraintBottom_toTopOf="@+id/relayFieveOn"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/relayThird" />
 
-    <Button
-        android:id="@+id/relaySixthOn"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relayFifth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
+        android:text="@string/relay_5_on"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relayFourth" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relaySixth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
         android:text="@string/relay_sixth_on"
-        app:layout_constraintBottom_toTopOf="@+id/relaySeventhOn"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/relayFifth" />
 
-    <Button
-        android:id="@+id/relaySeventhOn"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relaySeventh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
         android:text="@string/relay_seventh_on"
-        app:layout_constraintBottom_toTopOf="@+id/relayEighthOn"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/relaySixth" />
 
-    <Button
-        android:id="@+id/relayEighthOn"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/relayEighth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
         android:text="@string/relay_eighth_on"
-        app:layout_constraintBottom_toTopOf="@+id/relayAllOn"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:showText="true"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorDataView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/relaySeventh" />
+
+    <Button
+        android:id="@+id/relayAllOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/relay_all_off"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relayEighth" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

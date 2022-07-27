@@ -1,5 +1,6 @@
 package pl.ludek.smat.home.pool_office_client.data.apiservice
 
+import pl.ludek.smat.home.pool_office_client.domain.model.InitializationStateRelay
 import pl.ludek.smat.home.pool_office_client.domain.model.PoolInfoData
 import pl.ludek.smat.home.pool_office_client.domain.model.RelayData
 import retrofit2.Call
@@ -16,4 +17,7 @@ interface ApiPoolInfoService {
         @Path("relayId") relayId: Int,
         @Path("state") state: Int
     ): Call<RelayData>
+
+    @GET("/relay")
+    fun getInitializationState(): Call<InitializationStateRelay>
 }
