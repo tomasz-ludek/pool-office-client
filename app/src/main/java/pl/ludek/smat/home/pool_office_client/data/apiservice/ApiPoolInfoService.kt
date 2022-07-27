@@ -18,6 +18,6 @@ interface ApiPoolInfoService {
         @Path("state") state: Int
     ): Call<RelayData>
 
-    @GET("/relay/state")
+    @GET("/relay")
     fun getInitializationState(): Call<InitializationStateRelay>
 }
