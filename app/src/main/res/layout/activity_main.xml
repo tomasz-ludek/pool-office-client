@@ -33,57 +33,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
-            android:text="@string/relay_1_on"
-            app:showText="true" />
+            android:text="@string/relay_1_on" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_second"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_second_on"
-            app:showText="true" />
+            android:text="@string/relay_second_on" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_third"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_third_on"
-            app:showText="true" />
+            android:text="@string/relay_third_on" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_fourth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_fourth_on"
-            app:showText="true" />
+            android:text="@string/relay_fourth_on" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_fifth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_5_on"
-            app:showText="true" />
+            android:text="@string/relay_5_on" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_sixth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_sixth_on"
-            app:showText="true" />
+            android:text="@string/relay_sixth_on" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_seventh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_seventh_on"
-            app:showText="true" />
+            android:text="@string/relay_seventh_on" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_eighth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_eighth_on"
-            app:showText="true" />
+            android:text="@string/relay_eighth_on" />
 
     </LinearLayout>
 

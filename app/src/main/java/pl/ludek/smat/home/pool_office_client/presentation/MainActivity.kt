@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             if (relayData.errorRelay) {
                 showToast(errorRelayStr)
             }
+            ignoreSwitchCheckedChange = true
             if (relayData.relayNumber == RELAY_ID_ALL) {
                 binding.switchPane.forEach { switch ->
                     (switch as SwitchCompat).isChecked = relayData.stateRelay
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 val switch = binding.switchPane[relayData.relayNumber] as SwitchCompat
                 switch.isChecked = relayData.stateRelay
             }
+            ignoreSwitchCheckedChange = false
         })
     }
 
