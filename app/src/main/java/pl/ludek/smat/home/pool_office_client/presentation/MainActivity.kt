@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        mainActivityViewModel.updatePoolInfo()
-        mainActivityViewModel.updateCompleteRelayState()
+        updateData()
     }
 
     private fun initModel() {
@@ -92,11 +91,19 @@ class MainActivity : AppCompatActivity() {
         binding.relayAllOff.setOnClickListener {
             mainActivityViewModel.switchRelay(RELAY_ID_ALL, false)
         }
+        binding.refreshButton.setOnClickListener {
+            updateData()
+        }
     }
 
     private fun showToast(text: String) {
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(applicationContext, text, duration)
         toast.show()
+    }
+
+    private fun updateData(){
+        mainActivityViewModel.updatePoolInfo()
+        mainActivityViewModel.updateCompleteRelayState()
     }
 }

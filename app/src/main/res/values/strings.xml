@@ -13,4 +13,5 @@
     <string name="relay_sixth_on">RELAY-SIXTH</string>
     <string name="relay_seventh_on">RELAY-SEVENTH</string>
     <string name="relay_eighth_on">RELAY-EIGHTH</string>
+    <string name="refresh_button">REFRESH</string>
 </resources>
