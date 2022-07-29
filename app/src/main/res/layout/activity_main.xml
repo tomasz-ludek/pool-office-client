@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <TextView
-        android:id="@+id/sensor_data_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPoolInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/data_from_server"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/switch_pane"
@@ -25,14 +25,14 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensor_data_view">
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPoolInfo">
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_first"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
             android:text="@string/relay_1_on" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -57,7 +57,8 @@
             android:id="@+id/relay_fifth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_5_on" />
+            android:text="@string/relay_5_on"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/relay_sixth"
@@ -94,6 +95,7 @@
         android:layout_height="wrap_content"
         android:text="@string/relay_all_off"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relay_all_on" />
+        app:layout_constraintTop_toBottomOf="@+id/relay_all_on"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

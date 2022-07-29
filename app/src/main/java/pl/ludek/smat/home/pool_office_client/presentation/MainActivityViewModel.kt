@@ -28,12 +28,12 @@ class MainActivityViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     poolInfoData.value = response.body()
                 } else {
-                    poolInfoData.value = null
+                    poolInfoData.value = PoolInfoData(0.0f,0.0f,0.0f,0.0f,true)
                 }
             }
 
             override fun onFailure(call: Call<PoolInfoData>, t: Throwable) {
-                poolInfoData.value = null
+                poolInfoData.value = PoolInfoData(0.0f,0.0f,0.0f,0.0f,true)
                 Log.d(TAG, t.message.toString())
             }
         })
