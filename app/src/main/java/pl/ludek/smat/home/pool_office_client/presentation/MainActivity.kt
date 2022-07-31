@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         updateData()
+
+        refreshSwipe()
     }
 
     private fun initModel() {
@@ -105,5 +107,12 @@ class MainActivity : AppCompatActivity() {
     private fun updateData(){
         mainActivityViewModel.updatePoolInfo()
         mainActivityViewModel.updateCompleteRelayState()
+    }
+
+    private fun refreshSwipe(){
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            updateData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 }
