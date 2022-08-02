@@ -11,7 +11,6 @@ import androidx.core.view.size
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import pl.ludek.smat.home.pool_office_client.R
 import pl.ludek.smat.home.pool_office_client.databinding.ActivityMainBinding
 
@@ -36,9 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initModel() {
         mainActivityViewModel.poolInfoData.observe(this, Observer { poolInfoData ->
-                val recyclerView: RecyclerView = findViewById(R.id.recyclerViewPoolInfo)
-                recyclerView.layoutManager = LinearLayoutManager(this)
-                recyclerView.adapter = CustomAdapter(poolInfoData, poolInfoName)
+                  binding.recyclerViewPoolInfo.layoutManager = LinearLayoutManager(this)
+                binding.recyclerViewPoolInfo.adapter = CustomAdapter(poolInfoData, poolInfoName)
         })
         mainActivityViewModel.completeRelayStateData.observe(this, Observer { completeRelayData ->
             if (completeRelayData == null) {

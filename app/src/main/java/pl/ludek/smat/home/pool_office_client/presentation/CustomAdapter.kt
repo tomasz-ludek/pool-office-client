@@ -1,12 +1,11 @@
 package pl.ludek.smat.home.pool_office_client.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import pl.ludek.smat.home.pool_office_client.R
 import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoData
+import pl.ludek.smat.home.pool_office_client.databinding.PoolInfoTextViewBinding
 
 class CustomAdapter (poolInfoData: PoolInfoData, stringArray: Array<String>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>(){
     private lateinit var dataArray: Array<String>
@@ -21,17 +20,12 @@ class CustomAdapter (poolInfoData: PoolInfoData, stringArray: Array<String>) : R
        }
    }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
-        init {
-            textView = view.findViewById(R.id.textView)
-        }
+    class ViewHolder(viewBinding: PoolInfoTextViewBinding) : RecyclerView.ViewHolder(viewBinding.root) {
+            val textView:TextView = viewBinding.textView
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.pool_info_text_view, viewGroup, false)
-        return ViewHolder(view)
+        return ViewHolder(PoolInfoTextViewBinding.inflate(LayoutInflater.from(viewGroup.context)))
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
