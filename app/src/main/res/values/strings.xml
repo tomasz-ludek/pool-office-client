@@ -15,4 +15,5 @@
     <string name="relay_eighth_on">RELAY-EIGHTH</string>
     <string name="temperature_sensor">temperature sensor - </string>
     <string name="pump">pump - </string>
+    <string name="refresh_button">REFRESH</string>
 </resources>
