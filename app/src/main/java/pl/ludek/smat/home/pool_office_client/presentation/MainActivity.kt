@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         updateData()
-
-        refreshSwipe()
     }
 
     private fun initModel() {
@@ -96,6 +94,10 @@ class MainActivity : AppCompatActivity() {
         binding.refreshButton.setOnClickListener {
             updateData()
         }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            updateData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun showToast(text: String) {
@@ -107,12 +109,5 @@ class MainActivity : AppCompatActivity() {
     private fun updateData(){
         mainActivityViewModel.updatePoolInfo()
         mainActivityViewModel.updateCompleteRelayState()
-    }
-
-    private fun refreshSwipe(){
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            updateData()
-            binding.swipeRefreshLayout.isRefreshing = false
-        }
     }
 }
