@@ -95,6 +95,10 @@ class MainActivity : AppCompatActivity() {
         binding.refreshButton.setOnClickListener {
             updateData()
         }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            updateData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun showToast(text: String) {

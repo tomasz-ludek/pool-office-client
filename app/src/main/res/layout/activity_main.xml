@@ -1,109 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPoolInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".presentation.MainActivity"
+    android:id="@+id/swipeRefreshLayout">
 
     <LinearLayout
-        android:id="@+id/switch_pane"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPoolInfo">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_first"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPoolInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+             />
+
+        <LinearLayout
+            android:id="@+id/switch_pane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_1_on" />
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewPoolInfo">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/relay_second_on" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_third"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/relay_third_on" />
+                android:text="@string/relay_1_on" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_fourth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/relay_fourth_on" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relay_second_on" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_fifth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/relay_5_on"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_third"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relay_third_on" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_fourth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relay_fourth_on" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_fifth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relay_5_on"
             tools:ignore="TouchTargetSizeCheck" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_sixth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/relay_sixth_on" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_sixth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relay_sixth_on" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_seventh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/relay_seventh_on" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_seventh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relay_seventh_on" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/relay_eighth"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/relay_eighth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relay_eighth_on" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/relay_all_on"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/relay_eighth_on" />
+            android:layout_marginTop="16dp"
+            android:text="@string/relay_all_on"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_pane" />
+
+        <Button
+            android:id="@+id/relay_all_off"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/relay_all_off"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relay_all_on"
+        tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/refreshButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/refresh_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relay_all_off" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/relay_all_on"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/relay_all_on"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_pane" />
-
-    <Button
-        android:id="@+id/relay_all_off"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/relay_all_off"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relay_all_on"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/refreshButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/refresh_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relay_all_off" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
