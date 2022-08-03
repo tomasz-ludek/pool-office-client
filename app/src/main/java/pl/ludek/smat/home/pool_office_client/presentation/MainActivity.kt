@@ -10,16 +10,18 @@ import androidx.core.view.get
 import androidx.core.view.size
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import pl.ludek.smat.home.pool_office_client.R
 import pl.ludek.smat.home.pool_office_client.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var errorRelayStr: String
-    private lateinit var errorSensorStr: String
+    private lateinit var poolInfoName: Array<String>
     private var ignoreSwitchCheckedChange: Boolean = true
     private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initModel() {
         mainActivityViewModel.poolInfoData.observe(this, Observer { poolInfoData ->
-            if (poolInfoData == null) {
-                binding.sensorDataView.text = errorSensorStr
-            } else {
-                binding.sensorDataView.text =
-                    "T1= ${poolInfoData.t1} T2= ${poolInfoData.t2} T3= ${poolInfoData.t3} P1= ${poolInfoData.p1}"
-            }
+                  binding.recyclerViewPoolInfo.layoutManager = LinearLayoutManager(this)
+                binding.recyclerViewPoolInfo.adapter = CustomAdapter(poolInfoData, poolInfoName)
         })
         mainActivityViewModel.completeRelayStateData.observe(this, Observer { completeRelayData ->
             if (completeRelayData == null) {
@@ -73,7 +71,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         errorRelayStr = getString(R.string.relay_error)
-        errorSensorStr = getString(R.string.data_from_sensor)
+        poolInfoName = arrayOf(
+            getString(R.string.temperature_sensor),
+            getString(R.string.pump),
+            getString(R.string.data_from_sensor))
         mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         binding = ActivityMainBinding.inflate(layoutInflater)
 
