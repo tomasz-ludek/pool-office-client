@@ -3,10 +3,9 @@ package pl.ludek.smat.home.pool_office_client.presentation
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoClient
-import pl.ludek.smat.home.pool_office_client.data.apiservice.InitializationStateRelay
-import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoData
-import pl.ludek.smat.home.pool_office_client.data.apiservice.RelayData
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import pl.ludek.smat.home.pool_office_client.data.apiservice.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,24 +18,13 @@ class MainActivityViewModel : ViewModel() {
     private val poolInfoClient = PoolInfoClient
     val singleRelayStateData = MutableLiveData<RelayData>()
     val completeRelayStateData = MutableLiveData<Array<Boolean>>()
-
-    val poolInfoData = MutableLiveData<PoolInfoData>()
+    val poolInfoData =MutableLiveData<NetworkResult<PoolInfoData>>()
+    private val poolInfoClientMod = PoolInfoClientMod
 
     fun updatePoolInfo() {
-        poolInfoClient.getSensorData().enqueue(object : Callback<PoolInfoData> {
-            override fun onResponse(call: Call<PoolInfoData>, response: Response<PoolInfoData>) {
-                if (response.isSuccessful) {
-                    poolInfoData.value = response.body()
-                } else {
-                    poolInfoData.value = PoolInfoData(0.0f,0.0f,0.0f,0.0f,true)
-                }
-            }
-
-            override fun onFailure(call: Call<PoolInfoData>, t: Throwable) {
-                poolInfoData.value = PoolInfoData(0.0f,0.0f,0.0f,0.0f,true)
-                Log.d(TAG, t.message.toString())
-            }
-        })
+        GlobalScope.launch {
+            poolInfoData.postValue(poolInfoClientMod.getSensorData())
+        }
     }
 
     fun switchRelay(relayId: Int, relayState: Boolean) {
@@ -47,12 +35,12 @@ class MainActivityViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     singleRelayStateData.value = response.body()
                 } else {
-                    singleRelayStateData.value = RelayData(relayId, !relayState, errorRelay = true)
+                    singleRelayStateData.value = RelayData(relayId, !relayState, errorCode = 1)
                 }
             }
 
             override fun onFailure(call: Call<RelayData>, t: Throwable) {
-                singleRelayStateData.value = RelayData(relayId, !relayState, errorRelay = true)
+                singleRelayStateData.value = RelayData(relayId, !relayState, errorCode = 1)
                 Log.d(TAG, t.message.toString())
             }
         })
@@ -78,4 +66,5 @@ class MainActivityViewModel : ViewModel() {
                 }
             })
     }
+
 }

@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import pl.ludek.smat.home.pool_office_client.R
+import pl.ludek.smat.home.pool_office_client.data.apiservice.NetworkResult
+import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoData
 import pl.ludek.smat.home.pool_office_client.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,22 +24,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
         initModel()
-
         setContentView(binding.root)
-
         updateData()
     }
 
     private fun initModel() {
-        mainActivityViewModel.poolInfoData.observe(this, Observer { poolInfoData ->
-                  binding.recyclerViewPoolInfo.layoutManager = LinearLayoutManager(this)
-                binding.recyclerViewPoolInfo.adapter = CustomAdapter(poolInfoData, poolInfoName)
+        mainActivityViewModel.poolInfoData.observe(this, Observer {networkResultPoolInfoData ->
+            when(networkResultPoolInfoData){
+                is NetworkResult.Success -> {
+                    val poolInfoData = networkResultPoolInfoData.bodyData as PoolInfoData
+                    binding.recyclerViewPoolInfo.layoutManager = LinearLayoutManager(this)
+                    binding.recyclerViewPoolInfo.adapter = CustomAdapter(poolInfoData, poolInfoName)
+                }
+                is NetworkResult.Error -> showToast(networkResultPoolInfoData.message.toString())
+                is NetworkResult.Exception -> showToast("Exception")
+            }
         })
+
         mainActivityViewModel.completeRelayStateData.observe(this, Observer { completeRelayData ->
             if (completeRelayData == null) {
                 showToast(errorRelayStr)
@@ -53,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             ignoreSwitchCheckedChange = false
         })
         mainActivityViewModel.singleRelayStateData.observe(this, Observer { relayData ->
-            if (relayData.errorRelay) {
+            if (relayData.errorCode > 0) {
                 showToast(errorRelayStr)
             }
             ignoreSwitchCheckedChange = true
@@ -67,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
             ignoreSwitchCheckedChange = false
         })
+
     }
 
     private fun initView() {
