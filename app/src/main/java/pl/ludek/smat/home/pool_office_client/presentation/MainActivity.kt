@@ -12,8 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import pl.ludek.smat.home.pool_office_client.R
+import pl.ludek.smat.home.pool_office_client.data.apiservice.InitializationStateRelay
 import pl.ludek.smat.home.pool_office_client.data.apiservice.NetworkResult
 import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoData
+import pl.ludek.smat.home.pool_office_client.data.apiservice.RelayData
 import pl.ludek.smat.home.pool_office_client.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -45,34 +47,48 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        mainActivityViewModel.completeRelayStateData.observe(this, Observer { completeRelayData ->
-            if (completeRelayData == null) {
-                showToast(errorRelayStr)
-            } else {
-                ignoreSwitchCheckedChange = true
-                completeRelayData.forEachIndexed { index, state ->
-                    if (index < binding.switchPane.size) {
-                        val switch = binding.switchPane[index] as SwitchCompat
-                        switch.isChecked = state
+        mainActivityViewModel.completeRelayStateData.observe(this, Observer { networkResultCompleteRelayData ->
+            when(networkResultCompleteRelayData){
+                is NetworkResult.Success -> {
+                    val completeRelayData = networkResultCompleteRelayData.bodyData as InitializationStateRelay
+                    if (completeRelayData == null) {
+                        showToast(errorRelayStr)
+                    } else {
+                        ignoreSwitchCheckedChange = true
+                        completeRelayData.relayAnswer.forEachIndexed { index, state ->
+                            if (index < binding.switchPane.size) {
+                                val switch = binding.switchPane[index] as SwitchCompat
+                                switch.isChecked = state
+                            }
+                        }
                     }
+                    ignoreSwitchCheckedChange = false
                 }
+                is NetworkResult.Error -> showToast(networkResultCompleteRelayData.message.toString())
+                is NetworkResult.Exception -> showToast("Exception")
             }
-            ignoreSwitchCheckedChange = false
         })
-        mainActivityViewModel.singleRelayStateData.observe(this, Observer { relayData ->
-            if (relayData.errorCode > 0) {
-                showToast(errorRelayStr)
-            }
-            ignoreSwitchCheckedChange = true
-            if (relayData.relayNumber == RELAY_ID_ALL) {
-                binding.switchPane.forEach { switch ->
-                    (switch as SwitchCompat).isChecked = relayData.stateRelay
+        mainActivityViewModel.singleRelayStateData.observe(this, Observer { networkResultRelayData ->
+            when(networkResultRelayData){
+                is NetworkResult.Success -> {
+                    val relayData = networkResultRelayData.bodyData as RelayData
+                    if (relayData.errorCode > 0) {
+                        showToast(errorRelayStr)
+                    }
+                    ignoreSwitchCheckedChange = true
+                    if (relayData.relayNumber == RELAY_ID_ALL) {
+                        binding.switchPane.forEach { switch ->
+                            (switch as SwitchCompat).isChecked = relayData.stateRelay
+                        }
+                    } else {
+                        val switch = binding.switchPane[relayData.relayNumber] as SwitchCompat
+                        switch.isChecked = relayData.stateRelay
+                    }
+                    ignoreSwitchCheckedChange = false
                 }
-            } else {
-                val switch = binding.switchPane[relayData.relayNumber] as SwitchCompat
-                switch.isChecked = relayData.stateRelay
+                is NetworkResult.Error -> showToast(networkResultRelayData.message.toString())
+                is NetworkResult.Exception -> showToast("Exception")
             }
-            ignoreSwitchCheckedChange = false
         })
 
     }

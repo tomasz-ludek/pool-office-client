@@ -1,6 +1,5 @@
 package pl.ludek.smat.home.pool_office_client.data.apiservice
 
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -9,21 +8,22 @@ object PoolInfoClient {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .addCallAdapterFactory(DataCallAdapterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     private val service: ApiPoolInfoService = retrofit.create(ApiPoolInfoService::class.java)
 
-    fun switchRelay(relayID:Int, onOff: Boolean): Call<RelayData> {
+    suspend fun switchRelay(relayID:Int, onOff: Boolean): NetworkResult<RelayData> {
         val state = if(onOff) 1 else 0
         return service.switchRelay(relayID, state)
     }
 
-    fun getSensorData(): Call<PoolInfoData> {
+    suspend fun getSensorData(): NetworkResult<PoolInfoData> {
         return service.getSensorData()
     }
 
-    fun getInitializationStateRelay():Call<InitializationStateRelay>{
+    suspend fun getInitializationStateRelay():NetworkResult<InitializationStateRelay>{
         return service.getInitializationState()
     }
 }
