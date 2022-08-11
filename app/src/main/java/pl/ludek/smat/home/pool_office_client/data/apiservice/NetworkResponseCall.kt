@@ -75,5 +75,4 @@ internal class NetworkResponseCall <R : Any>(private val delegate: Call<R>): Cal
 
     override fun request(): Request = delegate.request()
 
-    override fun timeout(): Timeout = delegate.timeout()
-}
+    override fun timeout(): Timeout = delegate.timeout()}

@@ -2,7 +2,7 @@ package pl.ludek.smat.home.pool_office_client.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.GlobalScope
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import pl.ludek.smat.home.pool_office_client.data.apiservice.*
 
@@ -17,19 +17,19 @@ class MainActivityViewModel : ViewModel() {
     val poolInfoData =MutableLiveData<NetworkResult<PoolInfoData>>()
 
     fun updatePoolInfo() {
-        GlobalScope.launch {
+        viewModelScope.launch {
             poolInfoData.postValue(poolInfoClient.getSensorData())
         }
     }
 
     fun switchRelay(relayId: Int, relayState: Boolean) {
-        GlobalScope.launch {
+        viewModelScope.launch {
            singleRelayStateData.postValue(poolInfoClient.switchRelay(relayId, relayState))
         }
     }
 
     fun updateCompleteRelayState() {
-        GlobalScope.launch {
+        viewModelScope.launch {
            completeRelayStateData.postValue(poolInfoClient.getInitializationStateRelay())
         }
     }

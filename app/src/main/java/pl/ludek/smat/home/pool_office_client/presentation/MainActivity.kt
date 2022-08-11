@@ -51,9 +51,6 @@ class MainActivity : AppCompatActivity() {
             when(networkResultCompleteRelayData){
                 is NetworkResult.Success -> {
                     val completeRelayData = networkResultCompleteRelayData.bodyData as InitializationStateRelay
-                    if (completeRelayData == null) {
-                        showToast(errorRelayStr)
-                    } else {
                         ignoreSwitchCheckedChange = true
                         completeRelayData.relayAnswer.forEachIndexed { index, state ->
                             if (index < binding.switchPane.size) {
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity() {
                                 switch.isChecked = state
                             }
                         }
-                    }
                     ignoreSwitchCheckedChange = false
                 }
                 is NetworkResult.Error -> showToast(networkResultCompleteRelayData.message.toString())
