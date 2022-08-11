@@ -7,7 +7,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-internal class NetworkResponseCall <R : Any>(private val delegate: Call<R>): Call<NetworkResult<R>> {
+internal class NetworkResponseCall <R>(private val delegate: Call<R>): Call<NetworkResult<R>> {
     private val errorCode = 1
     override fun enqueue(callback: Callback<NetworkResult<R>>) {
         return delegate.enqueue(object : Callback<R> {
@@ -18,10 +18,18 @@ internal class NetworkResponseCall <R : Any>(private val delegate: Call<R>): Cal
 
                 if (response.isSuccessful) {
                     if (body != null) {
+                        val baseResponse = body as BaseResponse
+                        if (baseResponse.errorCode > 0){
                         callback.onResponse(
                             this@NetworkResponseCall,
-                            Response.success(NetworkResult.Success(body))
+                            Response.success(NetworkResult.Error(baseResponse.errorCode, "Error on the server"))
                         )
+                        }else{
+                            callback.onResponse(
+                                this@NetworkResponseCall,
+                                Response.success(NetworkResult.Success(body))
+                            )
+                        }
                     } else {
                         callback.onResponse(
                             this@NetworkResponseCall,
