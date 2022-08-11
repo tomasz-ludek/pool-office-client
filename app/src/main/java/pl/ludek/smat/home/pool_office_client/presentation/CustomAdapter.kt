@@ -10,7 +10,7 @@ import pl.ludek.smat.home.pool_office_client.databinding.PoolInfoTextViewBinding
 class CustomAdapter (poolInfoData: PoolInfoData, stringArray: Array<String>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>(){
     private lateinit var dataArray: Array<String>
    init {
-       if(poolInfoData.errorRelay){
+       if(poolInfoData.errorCode > 0){
            dataArray = arrayOf(stringArray[2])
        }else{
            dataArray = arrayOf(stringArray[0] +  poolInfoData.t1.toString(),

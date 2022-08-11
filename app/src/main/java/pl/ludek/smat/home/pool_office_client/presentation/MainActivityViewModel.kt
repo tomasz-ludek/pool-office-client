@@ -1,15 +1,10 @@
 package pl.ludek.smat.home.pool_office_client.presentation
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoClient
-import pl.ludek.smat.home.pool_office_client.data.apiservice.InitializationStateRelay
-import pl.ludek.smat.home.pool_office_client.data.apiservice.PoolInfoData
-import pl.ludek.smat.home.pool_office_client.data.apiservice.RelayData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import pl.ludek.smat.home.pool_office_client.data.apiservice.*
 
 private val TAG = MainActivityViewModel::class.java.simpleName
 const val RELAY_ID_ALL = 256
@@ -17,65 +12,25 @@ const val RELAY_ID_ALL = 256
 class MainActivityViewModel : ViewModel() {
 
     private val poolInfoClient = PoolInfoClient
-    val singleRelayStateData = MutableLiveData<RelayData>()
-    val completeRelayStateData = MutableLiveData<Array<Boolean>>()
-
-    val poolInfoData = MutableLiveData<PoolInfoData>()
+    val singleRelayStateData = MutableLiveData<NetworkResult<RelayData>>()
+    val completeRelayStateData = MutableLiveData<NetworkResult<InitializationStateRelay>>()
+    val poolInfoData =MutableLiveData<NetworkResult<PoolInfoData>>()
 
     fun updatePoolInfo() {
-        poolInfoClient.getSensorData().enqueue(object : Callback<PoolInfoData> {
-            override fun onResponse(call: Call<PoolInfoData>, response: Response<PoolInfoData>) {
-                if (response.isSuccessful) {
-                    poolInfoData.value = response.body()
-                } else {
-                    poolInfoData.value = PoolInfoData(0.0f,0.0f,0.0f,0.0f,true)
-                }
-            }
-
-            override fun onFailure(call: Call<PoolInfoData>, t: Throwable) {
-                poolInfoData.value = PoolInfoData(0.0f,0.0f,0.0f,0.0f,true)
-                Log.d(TAG, t.message.toString())
-            }
-        })
+        viewModelScope.launch {
+            poolInfoData.postValue(poolInfoClient.getSensorData())
+        }
     }
 
     fun switchRelay(relayId: Int, relayState: Boolean) {
-
-        poolInfoClient.switchRelay(relayId, relayState).enqueue(object : Callback<RelayData> {
-
-            override fun onResponse(call: Call<RelayData>, response: Response<RelayData>) {
-                if (response.isSuccessful) {
-                    singleRelayStateData.value = response.body()
-                } else {
-                    singleRelayStateData.value = RelayData(relayId, !relayState, errorRelay = true)
-                }
-            }
-
-            override fun onFailure(call: Call<RelayData>, t: Throwable) {
-                singleRelayStateData.value = RelayData(relayId, !relayState, errorRelay = true)
-                Log.d(TAG, t.message.toString())
-            }
-        })
+        viewModelScope.launch {
+           singleRelayStateData.postValue(poolInfoClient.switchRelay(relayId, relayState))
+        }
     }
 
     fun updateCompleteRelayState() {
-        poolInfoClient.getInitializationStateRelay()
-            .enqueue(object : Callback<InitializationStateRelay> {
-                override fun onResponse(
-                    call: Call<InitializationStateRelay>,
-                    response: Response<InitializationStateRelay>
-                ) {
-                    if (response.isSuccessful) {
-                        completeRelayStateData.value = response.body()!!.relayAnswer
-                    } else {
-                        completeRelayStateData.value = null
-                    }
-                }
-
-                override fun onFailure(call: Call<InitializationStateRelay>, t: Throwable) {
-                    Log.d(TAG, t.message.toString())
-                    completeRelayStateData.value = null
-                }
-            })
+        viewModelScope.launch {
+           completeRelayStateData.postValue(poolInfoClient.getInitializationStateRelay())
+        }
     }
 }
