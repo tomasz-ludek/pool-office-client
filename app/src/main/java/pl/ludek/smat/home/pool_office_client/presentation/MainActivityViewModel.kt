@@ -14,7 +14,7 @@ class MainActivityViewModel : ViewModel() {
     private val poolInfoClient = PoolInfoClient
     val singleRelayStateData = MutableLiveData<NetworkResult<RelayData>>()
     val completeRelayStateData = MutableLiveData<NetworkResult<InitializationStateRelay>>()
-    val poolInfoData =MutableLiveData<NetworkResult<PoolInfoData>>()
+    val poolInfoData = MutableLiveData<NetworkResult<PoolInfoData>>()
 
     fun updatePoolInfo() {
         viewModelScope.launch {
@@ -24,13 +24,13 @@ class MainActivityViewModel : ViewModel() {
 
     fun switchRelay(relayId: Int, relayState: Boolean) {
         viewModelScope.launch {
-           singleRelayStateData.postValue(poolInfoClient.switchRelay(relayId, relayState))
+            singleRelayStateData.postValue(poolInfoClient.switchRelay(relayId, relayState))
         }
     }
 
     fun updateCompleteRelayState() {
         viewModelScope.launch {
-           completeRelayStateData.postValue(poolInfoClient.getInitializationStateRelay())
+            completeRelayStateData.postValue(poolInfoClient.getInitializationStateRelay())
         }
     }
 }

@@ -14,8 +14,8 @@ object PoolInfoClient {
 
     private val service: ApiPoolInfoService = retrofit.create(ApiPoolInfoService::class.java)
 
-    suspend fun switchRelay(relayID:Int, onOff: Boolean): NetworkResult<RelayData> {
-        val state = if(onOff) 1 else 0
+    suspend fun switchRelay(relayID: Int, onOff: Boolean): NetworkResult<RelayData> {
+        val state = if (onOff) 1 else 0
         return service.switchRelay(relayID, state)
     }
 
@@ -23,7 +23,7 @@ object PoolInfoClient {
         return service.getSensorData()
     }
 
-    suspend fun getInitializationStateRelay():NetworkResult<InitializationStateRelay>{
+    suspend fun getInitializationStateRelay(): NetworkResult<InitializationStateRelay> {
         return service.getInitializationState()
     }
 }

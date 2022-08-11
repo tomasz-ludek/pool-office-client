@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initModel() {
-        mainActivityViewModel.poolInfoData.observe(this, Observer {networkResultPoolInfoData ->
-            when(networkResultPoolInfoData){
+        mainActivityViewModel.poolInfoData.observe(this, Observer { networkResultPoolInfoData ->
+            when (networkResultPoolInfoData) {
                 is NetworkResult.Success -> {
                     val poolInfoData = networkResultPoolInfoData.bodyData as PoolInfoData
                     binding.recyclerViewPoolInfo.layoutManager = LinearLayoutManager(this)
@@ -47,10 +47,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        mainActivityViewModel.completeRelayStateData.observe(this, Observer { networkResultCompleteRelayData ->
-            when(networkResultCompleteRelayData){
-                is NetworkResult.Success -> {
-                    val completeRelayData = networkResultCompleteRelayData.bodyData as InitializationStateRelay
+        mainActivityViewModel.completeRelayStateData.observe(
+            this,
+            Observer { networkResultCompleteRelayData ->
+                when (networkResultCompleteRelayData) {
+                    is NetworkResult.Success -> {
+                        val completeRelayData =
+                            networkResultCompleteRelayData.bodyData as InitializationStateRelay
                         ignoreSwitchCheckedChange = true
                         completeRelayData.relayAnswer.forEachIndexed { index, state ->
                             if (index < binding.switchPane.size) {
@@ -58,34 +61,36 @@ class MainActivity : AppCompatActivity() {
                                 switch.isChecked = state
                             }
                         }
-                    ignoreSwitchCheckedChange = false
-                }
-                is NetworkResult.Error -> showToast(networkResultCompleteRelayData.message.toString())
-                is NetworkResult.Exception -> showToast("Exception")
-            }
-        })
-        mainActivityViewModel.singleRelayStateData.observe(this, Observer { networkResultRelayData ->
-            when(networkResultRelayData){
-                is NetworkResult.Success -> {
-                    val relayData = networkResultRelayData.bodyData as RelayData
-                    if (relayData.errorCode > 0) {
-                        showToast(errorRelayStr)
+                        ignoreSwitchCheckedChange = false
                     }
-                    ignoreSwitchCheckedChange = true
-                    if (relayData.relayNumber == RELAY_ID_ALL) {
-                        binding.switchPane.forEach { switch ->
-                            (switch as SwitchCompat).isChecked = relayData.stateRelay
+                    is NetworkResult.Error -> showToast(networkResultCompleteRelayData.message.toString())
+                    is NetworkResult.Exception -> showToast("Exception")
+                }
+            })
+        mainActivityViewModel.singleRelayStateData.observe(
+            this,
+            Observer { networkResultRelayData ->
+                when (networkResultRelayData) {
+                    is NetworkResult.Success -> {
+                        val relayData = networkResultRelayData.bodyData as RelayData
+                        if (relayData.errorCode > 0) {
+                            showToast(errorRelayStr)
                         }
-                    } else {
-                        val switch = binding.switchPane[relayData.relayNumber] as SwitchCompat
-                        switch.isChecked = relayData.stateRelay
+                        ignoreSwitchCheckedChange = true
+                        if (relayData.relayNumber == RELAY_ID_ALL) {
+                            binding.switchPane.forEach { switch ->
+                                (switch as SwitchCompat).isChecked = relayData.stateRelay
+                            }
+                        } else {
+                            val switch = binding.switchPane[relayData.relayNumber] as SwitchCompat
+                            switch.isChecked = relayData.stateRelay
+                        }
+                        ignoreSwitchCheckedChange = false
                     }
-                    ignoreSwitchCheckedChange = false
+                    is NetworkResult.Error -> showToast(networkResultRelayData.message.toString())
+                    is NetworkResult.Exception -> showToast("Exception")
                 }
-                is NetworkResult.Error -> showToast(networkResultRelayData.message.toString())
-                is NetworkResult.Exception -> showToast("Exception")
-            }
-        })
+            })
 
     }
 
@@ -94,7 +99,8 @@ class MainActivity : AppCompatActivity() {
         poolInfoName = arrayOf(
             getString(R.string.temperature_sensor),
             getString(R.string.pump),
-            getString(R.string.data_from_sensor))
+            getString(R.string.data_from_sensor)
+        )
         mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -127,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         toast.show()
     }
 
-    private fun updateData(){
+    private fun updateData() {
         mainActivityViewModel.updatePoolInfo()
         mainActivityViewModel.updateCompleteRelayState()
     }
