@@ -30,6 +30,6 @@ class DataCallAdapterFactory : CallAdapter.Factory() {
 
         val successBodyType = getParameterUpperBound(0, responseType)
 
-        return DataCallAdapter<Any>(successBodyType)
+        return DataCallAdapter<BaseResponse>(successBodyType)
     }
 }
