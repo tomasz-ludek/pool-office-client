@@ -7,7 +7,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-internal class NetworkResponseCall <R : Any>(private val delegate: Call<R>): Call<NetworkResult<R>> {
+internal class NetworkResponseCall<R : BaseResponse>(private val delegate: Call<R>) :
+    Call<NetworkResult<R>> {
     private val errorCode = 1
     override fun enqueue(callback: Callback<NetworkResult<R>>) {
         return delegate.enqueue(object : Callback<R> {
@@ -18,14 +19,31 @@ internal class NetworkResponseCall <R : Any>(private val delegate: Call<R>): Cal
 
                 if (response.isSuccessful) {
                     if (body != null) {
-                        callback.onResponse(
-                            this@NetworkResponseCall,
-                            Response.success(NetworkResult.Success(body))
-                        )
+                        if (body.errorCode > 0) {
+                            callback.onResponse(
+                                this@NetworkResponseCall,
+                                Response.success(
+                                    NetworkResult.Error(
+                                        body.errorCode,
+                                        "Error on the server"
+                                    )
+                                )
+                            )
+                        } else {
+                            callback.onResponse(
+                                this@NetworkResponseCall,
+                                Response.success(NetworkResult.Success(body))
+                            )
+                        }
                     } else {
                         callback.onResponse(
                             this@NetworkResponseCall,
-                            Response.success(NetworkResult.Error(errorCode, "Response is successful but the body is null"))
+                            Response.success(
+                                NetworkResult.Error(
+                                    errorCode,
+                                    "Response is successful but the body is null"
+                                )
+                            )
                         )
                     }
                 } else {
@@ -45,7 +63,12 @@ internal class NetworkResponseCall <R : Any>(private val delegate: Call<R>): Cal
                     } else {
                         callback.onResponse(
                             this@NetworkResponseCall,
-                            Response.success(NetworkResult.Error(code, "Response is successful but the error body is null"))
+                            Response.success(
+                                NetworkResult.Error(
+                                    code,
+                                    "Response is successful but the error body is null"
+                                )
+                            )
                         )
                     }
                 }
@@ -75,4 +98,5 @@ internal class NetworkResponseCall <R : Any>(private val delegate: Call<R>): Cal
 
     override fun request(): Request = delegate.request()
 
-    override fun timeout(): Timeout = delegate.timeout()}
+    override fun timeout(): Timeout = delegate.timeout()
+}
