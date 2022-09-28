@@ -63,8 +63,14 @@ class MainActivity : AppCompatActivity() {
                         }
                         ignoreSwitchCheckedChange = false
                     }
-                    is NetworkResult.Error -> showToast(networkResultCompleteRelayData.message.toString())
-                    is NetworkResult.Exception -> showToast("Exception")
+                    is NetworkResult.Error -> {
+                        showToast(networkResultCompleteRelayData.message.toString())
+                        disablingSwitches()
+                    }
+                    is NetworkResult.Exception -> {
+                        showToast("Exception")
+                        disablingSwitches()
+                    }
                 }
             })
         mainActivityViewModel.singleRelayStateData.observe(
@@ -87,8 +93,14 @@ class MainActivity : AppCompatActivity() {
                         }
                         ignoreSwitchCheckedChange = false
                     }
-                    is NetworkResult.Error -> showToast(networkResultRelayData.message.toString())
-                    is NetworkResult.Exception -> showToast("Exception")
+                    is NetworkResult.Error -> {
+                        showToast(networkResultRelayData.message.toString())
+                        disablingSwitches()
+                    }
+                    is NetworkResult.Exception -> {
+                        showToast("Exception")
+                        disablingSwitches()
+                    }
                 }
             })
 
@@ -136,5 +148,14 @@ class MainActivity : AppCompatActivity() {
     private fun updateData() {
         mainActivityViewModel.updatePoolInfo()
         mainActivityViewModel.updateCompleteRelayState()
+    }
+
+    private fun disablingSwitches() {
+        ignoreSwitchCheckedChange = true
+        (0 until binding.switchPane.size).forEach { index ->
+            val switch = binding.switchPane[index] as SwitchCompat
+            switch.isClickable = false
+        }
+        ignoreSwitchCheckedChange = false
     }
 }
